@@ -1,9 +1,11 @@
 import React, { useState } from "react"
+import FeedBackRating from "./FeedBackRating"
 import Button from "./shared/Button"
 import Card from "./shared/Card"
 
 const FeedBackForm = () => {
   const [text, setText] = useState("")
+  const [rating, setRating] = useState(10)
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
   const [message, setMessage] = useState("")
   const handleInputChange = (e) => {
@@ -23,7 +25,7 @@ const FeedBackForm = () => {
     <Card>
       <form>
         <h2>How d u rate ur service with us ?</h2>
-        {/* selects */}
+        <FeedBackRating choose={(rating) => setRating(rating)} />
 
         <div className="input-group">
           <input

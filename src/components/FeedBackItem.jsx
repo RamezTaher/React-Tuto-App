@@ -1,21 +1,18 @@
-import React, { useState } from "react"
+import React from "react"
+import Card from "./shared/Card"
+import PropTypes from "prop-types"
 
-const FeedBackItem = () => {
-  const [rating, setRating] = useState(7)
-  const [feedbackText, setFeedbackText] = useState("This My first FeedBack")
-  const handleClick = () => {
-    setRating((prev) => {
-      console.log(prev)
-      return prev + 1
-    })
-  }
+const FeedBackItem = ({ item }) => {
   return (
-    <div className="card">
-      <div className="num-display">{rating}</div>
-      <div className="text-display">{feedbackText}</div>
-      <button onClick={() => handleClick()}>+</button>
-    </div>
+    <Card>
+      <div className="num-display">{item.rating}</div>
+      <div className="text-display">{item.text}</div>
+    </Card>
   )
+}
+
+FeedBackItem.propTypes = {
+  item: PropTypes.object.isRequired,
 }
 
 export default FeedBackItem

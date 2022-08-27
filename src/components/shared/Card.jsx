@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const Card = ({ children, isReverse }) => {
-  console.log(children)
   return (
     <div
       className="card"

@@ -3,7 +3,7 @@ import FeedBackRating from "./FeedBackRating"
 import Button from "./shared/Button"
 import Card from "./shared/Card"
 
-const FeedBackForm = () => {
+const FeedBackForm = ({ handleAdd }) => {
   const [text, setText] = useState("")
   const [rating, setRating] = useState(10)
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
@@ -21,9 +21,18 @@ const FeedBackForm = () => {
       setIsBtnDisabled(false)
     }
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const newFeedBack = {
+      text,
+      rating,
+    }
+    handleAdd(newFeedBack)
+  }
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>How d u rate ur service with us ?</h2>
         <FeedBackRating choose={(rating) => setRating(rating)} />
 

@@ -4,8 +4,20 @@ import Card from "./shared/Card"
 
 const FeedBackForm = () => {
   const [text, setText] = useState("")
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true)
+  const [message, setMessage] = useState("")
   const handleInputChange = (e) => {
     setText(e.target.value)
+    if (text === "") {
+      setIsBtnDisabled(true)
+      setMessage(null)
+    } else if (text !== "" && text.trim().length <= 10) {
+      setIsBtnDisabled(true)
+      setMessage("Review must be at least 10 characters")
+    } else {
+      setMessage(null)
+      setIsBtnDisabled(false)
+    }
   }
   return (
     <Card>
@@ -20,8 +32,11 @@ const FeedBackForm = () => {
             value={text}
             onChange={handleInputChange}
           />
-          <Button type="submit">Send</Button>
+          <Button type="submit" isDisabled={isBtnDisabled}>
+            Send
+          </Button>
         </div>
+        {message && <div className="message">{message}</div>}
       </form>
     </Card>
   )

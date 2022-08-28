@@ -3,7 +3,7 @@ import { createContext, useState } from "react"
 const FeedBackContext = createContext()
 
 export const FeedBackProvider = ({ children }) => {
-  const [feedBack, setFeedBack] = useState([
+  const [feedback, setFeedback] = useState([
     {
       id: 1,
       rating: 8,
@@ -11,7 +11,7 @@ export const FeedBackProvider = ({ children }) => {
     },
   ])
   return (
-    <FeedBackContext.Provider value={{ feedBack }}>
+    <FeedBackContext.Provider value={{ feedback }}>
       {children}
     </FeedBackContext.Provider>
   )

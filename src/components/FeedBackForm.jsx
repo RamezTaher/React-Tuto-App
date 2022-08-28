@@ -29,6 +29,7 @@ const FeedBackForm = ({ handleAdd }) => {
       rating,
     }
     handleAdd(newFeedBack)
+    setText("")
   }
   return (
     <Card>

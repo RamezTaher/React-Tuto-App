@@ -6,14 +6,14 @@
       "text": "This is a feedback item 1 coming from my fake backend"
     },
     {
-      "id": 2,
-      "rating": 10,
-      "text": "This is a feedback item 2 coming from my fake backend"
-    },
-    {
       "id": 3,
       "rating": 5,
       "text": "This is a feedback item 3 coming from my fake backend"
+    },
+    {
+      "text": "This uis Ramez's Review",
+      "rating": 7,
+      "id": 4
     }
   ]
 }

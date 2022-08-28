@@ -1,10 +1,20 @@
-import React from "react"
+import React, { useContext, useEffect, useState } from "react"
 import PropTypes from "prop-types"
+import FeedBackContext from "../../context/FeedBackContext"
 
-const Button = ({ children, type, version, isDisabled }) => {
+const Button = ({ type, version, isDisabled }) => {
+  const { feedBackUpdate } = useContext(FeedBackContext)
+  const [btnText, SetbtnText] = useState("Send")
+
+  useEffect(() => {
+    if (feedBackUpdate.isOnUpdateMode) {
+      SetbtnText("Update")
+    }
+  }, [feedBackUpdate])
+
   return (
     <button type={type} disabled={isDisabled} className={`btn btn-${version}`}>
-      {children}
+      {btnText}
     </button>
   )
 }
@@ -16,7 +26,6 @@ Button.defaultProps = {
 }
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired,
   version: PropTypes.string,
   type: PropTypes.string,
   isDisabled: PropTypes.bool,

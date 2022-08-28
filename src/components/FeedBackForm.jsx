@@ -1,13 +1,25 @@
-import React, { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import FeedBackContext from "../context/FeedBackContext"
 import FeedBackRating from "./FeedBackRating"
 import Button from "./shared/Button"
 import Card from "./shared/Card"
 
-const FeedBackForm = ({ handleAdd }) => {
+const FeedBackForm = () => {
   const [text, setText] = useState("")
   const [rating, setRating] = useState(10)
   const [isBtnDisabled, setIsBtnDisabled] = useState(true)
   const [message, setMessage] = useState("")
+
+  const { addFeedBack, feedBackUpdate, updateFeedBackContent } =
+    useContext(FeedBackContext)
+  useEffect(() => {
+    if (feedBackUpdate.isOnUpdateMode) {
+      setIsBtnDisabled(false)
+      setText(feedBackUpdate.item.text)
+      setRating(feedBackUpdate.item.rating)
+    }
+  }, [feedBackUpdate])
+
   const handleInputChange = (e) => {
     setText(e.target.value)
     if (text === "") {
@@ -28,7 +40,12 @@ const FeedBackForm = ({ handleAdd }) => {
       text,
       rating,
     }
-    handleAdd(newFeedBack)
+    if (feedBackUpdate.isOnUpdateMode) {
+      updateFeedBackContent(feedBackUpdate.item.id, newFeedBack)
+    } else {
+      addFeedBack(newFeedBack)
+    }
+
     setText("")
   }
   return (
@@ -44,9 +61,7 @@ const FeedBackForm = ({ handleAdd }) => {
             value={text}
             onChange={handleInputChange}
           />
-          <Button type="submit" isDisabled={isBtnDisabled}>
-            Send
-          </Button>
+          <Button type="submit" isDisabled={isBtnDisabled} />
         </div>
         {message && <div className="message">{message}</div>}
       </form>
